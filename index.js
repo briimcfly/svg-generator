@@ -1,7 +1,9 @@
 const {readFile, writeFile} = require('fs');
 const inquirer = require('inquirer'); 
-const ColorLib = require('./lib/Colors'); //color library
-const GenerateLogo = require('./lib/Logo'); //starting logo
+const ColorLib = require('./lib/Colors.js'); //color library
+const GenerateLogo = require('./lib/Logo.js'); //starting logo
+const { Triangle, Circle, Square } = require('./lib/Shapes.js'); //shapes
+
 
 GenerateLogo();
 
@@ -25,12 +27,12 @@ inquirer
         //Ask user for Logo Text
         type: 'input',
         message: 'Enter up to 3 characters for the logo text',
-        name: 'logo',
+        name: 'text',
         //check to make sure logo is > 0 and < 4
-        validate: logo => {
-            if (!logo) {
+        validate: text => {
+            if (!text) {
                 return 'Logo Text is required'; 
-            } else if (logo.length > 3) {
+            } else if (text.length > 3) {
                 return 'Logo must be 3 characters or less';
             } else {
                 return true;
@@ -64,10 +66,14 @@ inquirer
     },
 ])
 .then((response) => {
-const logo = response.logo;
+const text = response.text;
 const textColor = response.textColor;
 const shape = response.shape;
 const shapeColor = response.shapeColor;
 
-console.log(logo,textColor,shape,shapeColor);
+if (shape == 'circle') {
+    const circle = new Circle(text, textColor, shapeColor);
+    writeFile('logo.svg', circle.render(), (err => {err ? console.log("Error") : console.log("SVG Generated!")}));
+}
+
 })
