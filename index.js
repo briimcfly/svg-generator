@@ -1,7 +1,7 @@
 const {readFile, writeFile} = require('fs');
-const inquirer = require('inquirer');
-const ColorLib = require('./lib/Colors');
-const GenerateLogo = require('./lib/Logo');
+const inquirer = require('inquirer'); 
+const ColorLib = require('./lib/Colors'); //color library
+const GenerateLogo = require('./lib/Logo'); //starting logo
 
 GenerateLogo();
 
@@ -22,6 +22,7 @@ function colorCheck(color) {
 inquirer
 .prompt([
     {
+        //Ask user for Logo Text
         type: 'input',
         message: 'Enter up to 3 characters for the logo text',
         name: 'logo',
@@ -37,25 +38,36 @@ inquirer
             }
     },
     {
+        //Ask user for Logo Text Color
         type: 'input',
         message: 'Enter a color keyword (blue, green, red, etc.) or a hexadecimal number for your Logo Text Color',
         name: 'textColor',
         validate: textColor => colorCheck(textColor)
     },
     {
+        //Ask user for Shape
         type: 'list',
         message: 'Choose a shape',
         name: 'shape',
         choices: [
-            'Circle',
-            'Triangle',
-            'Square'
+            'circle',
+            'triangle',
+            'square'
         ]
     },
     {
+        //Ask user for Shape Color 
         type: 'input',
         message: 'Enter a color keyword (blue, green, red, etc.) or a hexadecimal number for your Logo Shape Color',
         name: 'shapeColor',
         validate: shapeColor => colorCheck(shapeColor)
     },
 ])
+.then((response) => {
+const logo = response.logo;
+const textColor = response.textColor;
+const shape = response.shape;
+const shapeColor = response.shapeColor;
+
+console.log(logo,textColor,shape,shapeColor);
+})
