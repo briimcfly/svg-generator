@@ -32,7 +32,7 @@ function createSVG(shape){
     writeFile('examples/logo.svg', shape.render(), (err => {err ? console.log("Error") : console.log("SVG Generated!")}));
 }
 
-
+//Prompt Block
 inquirer
 .prompt([
     {
@@ -56,6 +56,7 @@ inquirer
         type: 'input',
         message: 'Enter a color keyword (blue, green, red, etc.) or a hexadecimal number for your Logo Text Color',
         name: 'textColor',
+        //Test the Color
         validate: textColor => colorCheck(textColor)
     },
     {
@@ -74,6 +75,7 @@ inquirer
         type: 'input',
         message: 'Enter a color keyword (blue, green, red, etc.) or a hexadecimal number for your Logo Shape Color',
         name: 'shapeColor',
+        //Test the Color
         validate: shapeColor => colorCheck(shapeColor)
     },
 ])
