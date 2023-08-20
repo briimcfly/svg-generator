@@ -5,7 +5,18 @@ const GenerateLogo = require('./lib/Logo');
 
 GenerateLogo();
 
-
+//Color Check Functions
+function colorCheck(color) {
+    //reg expression for correct hex value || 3 or 6 code (#fff & #fffffff = true)
+    const isHex = /^#([A-Fa-f0-9]{3}$|[A-Fa-f0-9]{6}$)/.test(color);
+    //check the color library for color names
+    const isKeyword = ColorLib.includes(color.toLowerCase());
+    //error message if user enters incorrect hex or keyword
+    if (!isHex && !isKeyword) {
+        return 'Color must be a valid hexadecimal code or color name';
+    }
+    return true;
+}
 
 
 inquirer
@@ -27,28 +38,24 @@ inquirer
     },
     {
         type: 'input',
-        message: 'Enter a color keyword (blue, green, red, etc.) or a hexadecimal number',
-        name: 'color',
-        validate: color => {
-            //reg expression for correct hex value || 3 or 6 code (#fff & #fffffff = true)
-            const isHex = /^#([A-Fa-f0-9]{3}$|[A-Fa-f0-9]{6}$)/.test(color);
-            //check the color library for color names
-            const isKeyword = ColorLib.includes(color.toLowerCase());
-            //error message if user enters incorrect hex or keyword
-            if (!isHex && !isKeyword) {
-                return 'Color must be a valid hexadecimal code or color name';
-            }
-            return true;
-        }
+        message: 'Enter a color keyword (blue, green, red, etc.) or a hexadecimal number for your Logo Text Color',
+        name: 'textColor',
+        validate: textColor => colorCheck(textColor)
     },
     {
         type: 'list',
         message: 'Choose a shape',
         name: 'shape',
         choices: [
-            'Triangle',
             'Circle',
+            'Triangle',
             'Square'
         ]
-    }
+    },
+    {
+        type: 'input',
+        message: 'Enter a color keyword (blue, green, red, etc.) or a hexadecimal number for your Logo Shape Color',
+        name: 'shapeColor',
+        validate: shapeColor => colorCheck(shapeColor)
+    },
 ])
