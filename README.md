@@ -40,7 +40,7 @@ After completing the installation, start the application and follow the prompts.
 * Jest
 
 ## Reflection 
-This project has allowed me to apply the core skills I have recently learned and put them into practice. During development, I had the opportunity to deepen my understanding of NPM and creating tests with Jest. Additionally, I developed a deeper appreciation for for the importance code commenting, and the development principal DRY. (Don't repeat yourself). In 
+This project has allowed me to apply the core skills I have recently learned and put them into practice. During development, I had the opportunity to deepen my understanding of NPM and creating tests with Jest. Additionally, I developed a deeper appreciation for for the importance code commenting, and the development principal DRY. (Don't repeat yourself). In the future, I would like to give users the ability to set their font-family. 
 
 ## Questions
 If you have any questions or need further assistance, feel free to reach out to me:<br>
