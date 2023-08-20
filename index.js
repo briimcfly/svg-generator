@@ -1,10 +1,10 @@
-const {readFile, writeFile} = require('fs');
+const {readFile,writeFile} = require('fs');
 const inquirer = require('inquirer'); 
 const ColorLib = require('./lib/Colors.js'); //color library
 const GenerateLogo = require('./lib/Logo.js'); //starting logo
 const { Triangle, Circle, Square } = require('./lib/Shapes.js'); //shapes
 
-
+//Generate the Application Logo
 GenerateLogo();
 
 //Color Check Functions
@@ -18,6 +18,18 @@ function colorCheck(color) {
         return 'Color must be a valid hexadecimal code or color name';
     }
     return true;
+}
+
+//Types of Shapes
+const shapeTypes = {
+    'circle': Circle,
+    'square': Square,
+    'triangle': Triangle
+};
+
+//function to Write the SVG 
+function createSVG(shape){
+    writeFile('logo.svg', shape.render(), (err => {err ? console.log("Error") : console.log("SVG Generated!")}));
 }
 
 
@@ -66,14 +78,10 @@ inquirer
     },
 ])
 .then((response) => {
-const text = response.text;
-const textColor = response.textColor;
-const shape = response.shape;
-const shapeColor = response.shapeColor;
 
-if (shape == 'circle') {
-    const circle = new Circle(text, textColor, shapeColor);
-    writeFile('logo.svg', circle.render(), (err => {err ? console.log("Error") : console.log("SVG Generated!")}));
-}
+//Generate the SVG
+const svg = new shapeTypes[response.shape](response.text,response.textColor, response.shapeColor);
+createSVG(svg);
+
 
 })
