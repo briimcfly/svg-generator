@@ -29,7 +29,7 @@ const shapeTypes = {
 
 //function to Write the SVG 
 function createSVG(shape){
-    writeFile('logo.svg', shape.render(), (err => {err ? console.log("Error") : console.log("SVG Generated!")}));
+    writeFile('examples/logo.svg', shape.render(), (err => {err ? console.log("Error") : console.log("SVG Generated!")}));
 }
 
 
