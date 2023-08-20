@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const ColorLib = require('./lib/Colors.js'); //color library
 const GenerateLogo = require('./lib/Logo.js'); //starting logo
 const { Triangle, Circle, Square } = require('./lib/Shapes.js'); //shapes
+const chalk = require('chalk');
 
 //Generate the Application Logo
 GenerateLogo();
@@ -29,7 +30,7 @@ const shapeTypes = {
 
 //function to Write the SVG 
 function createSVG(shape){
-    writeFile('examples/logo.svg', shape.render(), (err => {err ? console.log("Error") : console.log("SVG Generated!")}));
+    writeFile('examples/logo.svg', shape.render(), (err => {err ? console.log("Error") : console.log(chalk.magenta("Generated logo.svg"))}));
 }
 
 //Prompt Block
